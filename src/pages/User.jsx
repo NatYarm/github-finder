@@ -1,16 +1,19 @@
 import { useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa';
+import RepoList from '../components/repos/RepoList';
 import Spinner from '../components/layout/Spinner';
 import GithubContext from '../context/github/GithubContext';
 
 const User = () => {
-  const { getUser, user, loading } = useContext(GithubContext);
+  const { getUser, user, loading, getUserRepos, repos } =
+    useContext(GithubContext);
 
   const params = useParams();
 
   useEffect(() => {
     getUser(params.login);
+    getUserRepos(params.login);
   }, []);
 
   const {
@@ -51,11 +54,11 @@ const User = () => {
               <figure>
                 <img src={avatar_url} alt="" />
               </figure>
-              <div className="card-body justify-end">
-                <h2 className="card-title mb-0" style={{ color: '#fff' }}>
+              <div className="card-body justify-end ">
+                <h2 className="card-title mb-0 " style={{ color: '#fff' }}>
                   {name}
                 </h2>
-                <p className="flex-grow-0" style={{ color: '#fff' }}>
+                <p className="flex-grow-0 " style={{ color: '#fff' }}>
                   {login}
                 </p>
               </div>
@@ -123,7 +126,7 @@ const User = () => {
           <div className="grid grid-cols-1 md:grid-cols-4">
             <div className="stat">
               <div className="stat-figure text-secondary">
-                <FaUsers className="text-3xl md:text-5xl" />
+                <FaUsers className="text-3xl md:text-5xl " />
               </div>
               <div className="stat-title pr-5">Followers</div>
               <div className="stat-value pr-5 text-3xl md:text-4xl">
@@ -163,7 +166,7 @@ const User = () => {
           </div>
         </div>
 
-        {/* <RepoList repos={repos} /> */}
+        <RepoList repos={repos} />
       </div>
     </>
   );
