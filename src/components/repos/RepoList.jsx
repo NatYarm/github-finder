@@ -21,8 +21,3 @@ RepoList.propTypes = {
 };
 
 export default RepoList;
-
-// dispatch({
-//   type: 'GET_REPOS',
-//   payload: data,
-// });
